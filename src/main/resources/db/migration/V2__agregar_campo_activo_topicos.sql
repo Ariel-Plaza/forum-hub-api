@@ -1,0 +1,3 @@
+ALTER TABLE topicos ADD activo TINYINT NOT NULL DEFAULT 1;
+
+UPDATE topicos SET activo = 1 WHERE activo IS NULL;
