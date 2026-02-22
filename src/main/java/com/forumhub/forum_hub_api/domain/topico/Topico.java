@@ -1,4 +1,4 @@
-package com.forumhub.forum_hub_api.topico;
+package com.forumhub.forum_hub_api.domain.topico;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

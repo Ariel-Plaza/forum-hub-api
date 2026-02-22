@@ -1,5 +1,5 @@
 package com.forumhub.forum_hub_api.controller;
-import com.forumhub.forum_hub_api.topico.*;
+import com.forumhub.forum_hub_api.domain.topico.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,20 +47,29 @@ public class TopicoController {
 
     //Actualizar topico
     @Transactional
-    @PutMapping
-    public ResponseEntity actualizar(@RequestBody @Valid DatosActualizacionTopico datos){
-        var topico = repository.getReferenceById(datos.id());
-        topico.actualizarTopico(datos);
+    @PutMapping("/{id}")
+    public ResponseEntity actualizar(@PathVariable Long id, @RequestBody @Valid DatosActualizacionTopico datos) {
+        var topico = repository.findById(id);
 
-        return ResponseEntity.ok(new DatosDetalleTopico(topico));
+        if (topico.isPresent()) {
+            topico.get().actualizarTopico(datos);
+            return ResponseEntity.ok(new DatosDetalleTopico(topico.get()));
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
     //Eliminar topico
     @Transactional
     @DeleteMapping("/{id}")
-    public ResponseEntity eliminar(@PathVariable Long id){
-        var topico = repository.getReferenceById(id);
-        topico.eliminar();
-        return  ResponseEntity.noContent().build();
+    public ResponseEntity eliminar(@PathVariable Long id) {
+        var topico = repository.findById(id);
+
+        if (topico.isPresent()) {
+            repository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.notFound().build();
     }
 }

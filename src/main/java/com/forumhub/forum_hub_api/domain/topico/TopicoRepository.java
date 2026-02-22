@@ -1,4 +1,4 @@
-package com.forumhub.forum_hub_api.topico;
+package com.forumhub.forum_hub_api.domain.topico;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
