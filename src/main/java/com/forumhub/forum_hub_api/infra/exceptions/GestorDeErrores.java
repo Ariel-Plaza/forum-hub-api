@@ -1,4 +1,4 @@
-package com.forumhub.forum_hub_api.infra;
+package com.forumhub.forum_hub_api.infra.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
