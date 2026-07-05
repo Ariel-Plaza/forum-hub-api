@@ -11,7 +11,6 @@ public record DatosActualizacionTopico(
         String titulo,
         @NotBlank
         String mensaje,
-        LocalDateTime fechaCreacion,
         String status,
         String autor,
         String curso
