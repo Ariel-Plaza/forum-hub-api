@@ -124,7 +124,7 @@ Cliente → [cualquier endpoint] + Header "Authorization: Bearer <token>" → AP
 
 #### `POST /topicos` — Crear tópico
 
-Todos los campos son **obligatorios** (`@NotBlank`). `titulo` y `mensaje` deben ser **únicos** en la base de datos.
+Todos los campos son **obligatorios** (`@NotBlank`). `titulo` debe ser **único** en la base de datos.
 
 ```json
 {
@@ -253,7 +253,7 @@ Realiza un **borrado lógico**: cambia `activo` a `false` sin eliminar el regist
 |-------|------|---------------|
 | `id` | `BIGINT` | PK, autogenerado |
 | `titulo` | `VARCHAR` | Único |
-| `mensaje` | `VARCHAR` | Único |
+| `mensaje` | `VARCHAR` | - |
 | `fechaCreacion` | `DATETIME` | Autogenerada al crear |
 | `status` | `VARCHAR` | Ej: `ABIERTO`, `CERRADO` |
 | `autor` | `VARCHAR` | — |
