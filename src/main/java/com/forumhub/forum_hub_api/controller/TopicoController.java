@@ -60,16 +60,14 @@ public class TopicoController {
     }
 
     //Eliminar topico
-    @Transactional
-    @DeleteMapping("/{id}")
-    public ResponseEntity eliminar(@PathVariable Long id) {
+   @Transactional
+   @DeleteMapping("/{id}")
+   public ResponseEntity eliminar(@PathVariable Long id) {
         var topico = repository.findById(id);
-
         if (topico.isPresent()) {
-            repository.deleteById(id);
+            topico.get().eliminar();
             return ResponseEntity.noContent().build();
         }
-
         return ResponseEntity.notFound().build();
     }
 }
