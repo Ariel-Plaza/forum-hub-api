@@ -36,33 +36,13 @@ public class AutenticacionController {
 
     @PostMapping
     public ResponseEntity autenticarUsuario(@RequestBody @Valid DatosAutenticacionUsuario datosAutenticacionUsuario) {
-
-        System.out.println(">>> Intentando login con: " + datosAutenticacionUsuario.login());
-        System.out.println(">>> Clave enviada (raw): " + datosAutenticacionUsuario.clave());
-
-
-        var usuarioEnDB = repository.findByLogin(datosAutenticacionUsuario.login());
-        if (usuarioEnDB != null) {
-            System.out.println(">>> Usuario encontrado en DB");
-            System.out.println(">>> Hash en DB: " + usuarioEnDB.getPassword());
-            System.out.println("NUEVO HASH GENERADO: " + passwordEncoder.encode("123456"));
-            // Comparación manual rápida para probar el bean
-            boolean coinciden = passwordEncoder.matches(datosAutenticacionUsuario.clave(), usuarioEnDB.getPassword());
-            System.out.println(">>> ¿Coinciden según BCrypt?: " + coinciden);
-        } else {
-            System.out.println(">>> USUARIO NO ENCONTRADO EN DB");
-        }
+        
         try{
             var authenticationToken = new UsernamePasswordAuthenticationToken(datosAutenticacionUsuario.login(), datosAutenticacionUsuario.clave());
             var autenticacion =  authenticationManager.authenticate(authenticationToken);
-
             var tokenJWT = tokenService.generarToken((Usuario) autenticacion.getPrincipal());
-
             return ResponseEntity.ok(new DatosJWTToken(tokenJWT));
-
-
         } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
