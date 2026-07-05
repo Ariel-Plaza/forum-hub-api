@@ -46,9 +46,6 @@ public class Topico {
         if(datos.mensaje() != null){
             this.mensaje = datos.mensaje();
         }
-        if(datos.fechaCreacion() != null){
-            this.fechaCreacion = datos.fechaCreacion();
-        }
         if(datos.status() != null){
             this.status = datos.status();
         }
