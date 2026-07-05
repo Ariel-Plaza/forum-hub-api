@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 public class AutenticacionController {
 
-    @Autowired // <--- AGREGA ESTO
+    @Autowired 
     private UsuarioRepository repository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder; // Importa org.springframework.security.crypto.password.PasswordEncoder
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -43,7 +43,7 @@ public class AutenticacionController {
             var tokenJWT = tokenService.generarToken((Usuario) autenticacion.getPrincipal());
             return ResponseEntity.ok(new DatosJWTToken(tokenJWT));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body("Credenciales inválidas");
         }
     }
     }
